@@ -5,7 +5,7 @@
       closeId: 'header-search-close',
     },
     navScrollToggle: {
-      navbarId: 'navbar',
+      navBarId: 'navbar',
       navHideClass: 'nav-hide',
       doneScrollingAfter: 1000,
     }
