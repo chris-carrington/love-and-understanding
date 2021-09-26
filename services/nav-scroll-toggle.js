@@ -11,9 +11,9 @@
         } else if (!window.$love[namespace] || typeof window.$love[namespace] !== 'object') {
           isValid = false;
           errors.push(`Please define window.$love.${ namespace } as an object`);
-        } else if (!window.$love[namespace].navBarId || typeof window.$love[namespace].navBarId !== 'string') {
+        } else if (!window.$love[namespace].navId || typeof window.$love[namespace].navId !== 'string') {
           isValid = false;
-          errors.push(`Please define window.$love.${ namespace }.navBarId as a string`);
+          errors.push(`Please define window.$love.${ namespace }.navId as a string`);
         } else if (!window.$love[namespace].navHideClass || typeof window.$love[namespace].navHideClass !== 'string') {
           isValid = false;
           errors.push(`Please define window.$love.${ namespace }.navHideClass as a string`);
@@ -30,7 +30,7 @@
             lastScrollTop = 0,
             isScrolling = false,
             config = window.$love[namespace],
-            nav = document.getElementById(config.navBarId);
+            nav = document.getElementById(config.navId);
       
         if (nav) {
           window.addEventListener('scroll', function () {
@@ -54,12 +54,12 @@
             }, config.doneScrollingAfter);
           }, false);
         } else {
-          throw `The id ${ config.navBarId } was not found on any elements on this page`;
+          throw `The id ${ config.navId } was not found on any elements`;
         }
       };
 
   response = validate();
 
-  if (response.isValid) action();
+  if (response.isValid) document.addEventListener('DOMContentLoaded', action);
   else throw response.errors.toString();
 }());

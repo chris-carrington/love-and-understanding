@@ -14,8 +14,8 @@
     },
 
     navScrollToggle: { // ./services/nav-scroll-toggle.js
-      navBarId: 'navbar', // Nav bar DOM ID
-      navHideClass: 'nav-hide', // Class to apply to nav bar to hide it
+      navId: 'navbar', // Nav DOM ID
+      navHideClass: 'nav-hide', // Class to apply to nav to hide it
       doneScrollingAfter: 1000, // How many ms after scrolling we'll say scrolling is done
     },
 

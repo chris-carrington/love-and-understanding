@@ -42,9 +42,9 @@
             };
 
         if (!input) {
-          throw `The id ${ config.inputId } was not found on any elements on this page`;
+          throw `The id ${ config.inputId } was not found on any elements`;
         } else if (!close) {
-          throw `The id ${ config.closeId } was not found on any elements on this page`;
+          throw `The id ${ config.closeId } was not found on any elements`;
         } else {
           setCloseVisibility();
           bindInputListener();
@@ -54,6 +54,6 @@
 
   response = validate();
 
-  if (response.isValid) action();
+  if (response.isValid) document.addEventListener('DOMContentLoaded', action);
   else throw response.errors.toString();
 })();
