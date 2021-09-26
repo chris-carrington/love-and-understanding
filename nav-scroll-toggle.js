@@ -42,7 +42,7 @@
               if (scrollTop > lastScrollTop) { // downscroll
                 nav.classList.add(config.navHideClass);
               } else { // upscroll
-                nav.classList.remove(navHideClass);
+                nav.classList.remove(config.navHideClass);
               }
       
               isScrolling = true;
