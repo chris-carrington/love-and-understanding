@@ -41,7 +41,11 @@
               });
             };
 
-        if (input && close) {
+        if (!input) {
+          throw `The id ${ config.inputId } was not found on any elements on this page`;
+        } else if (!close) {
+          throw `The id ${ config.closeId } was not found on any elements on this page`;
+        } else {
           setCloseVisibility();
           bindInputListener();
           bindCloseListener();
