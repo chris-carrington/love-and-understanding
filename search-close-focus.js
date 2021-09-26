@@ -22,7 +22,7 @@
         return { errors: errors, isValid: isValid };
       },
       action = function () {
-        var config = $window.$love[namespace],
+        var config = window.$love[namespace],
             input = document.getElementById(config.inputId),
             close = document.getElementById(config.closeId),
             setCloseVisibility = function (value) {
