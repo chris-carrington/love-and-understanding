@@ -1,28 +1,28 @@
 (function () {
-  var response,
-      namespace = 'searchCloseFocus',
-      validate = function () {
+  var validationResponse,
+      configNamespace = 'searchCloseFocus',
+      validateConfig = function () {
         var errors = [],
             isValid = true;
 
         if (!window.$love || typeof window.$love !== 'object') {
           isValid = false;
           errors.push('Please define window.$love as an object');
-        } else if (!window.$love[namespace] || typeof window.$love[namespace] !== 'object') {
+        } else if (!window.$love[configNamespace] || typeof window.$love[configNamespace] !== 'object') {
           isValid = false;
-          errors.push(`Please define window.$love.${ namespace } as an object`);
-        } else if (!window.$love[namespace].inputId || typeof window.$love[namespace].inputId !== 'string') {
+          errors.push(`Please define window.$love.${ configNamespace } as an object`);
+        } else if (!window.$love[configNamespace].inputId || typeof window.$love[configNamespace].inputId !== 'string') {
           isValid = false;
-          errors.push(`Please define window.$love.${ namespace }.inputId as a string`);
-        } else if (!window.$love[namespace].closeId || typeof window.$love[namespace].closeId !== 'string') {
+          errors.push(`Please define window.$love.${ configNamespace }.inputId as a string`);
+        } else if (!window.$love[configNamespace].closeId || typeof window.$love[configNamespace].closeId !== 'string') {
           isValid = false;
-          errors.push(`Please define window.$love.${ namespace }.closeId as a string`);
+          errors.push(`Please define window.$love.${ configNamespace }.closeId as a string`);
         }
 
         return { errors: errors, isValid: isValid };
       },
       action = function () {
-        var config = window.$love[namespace],
+        var config = window.$love[configNamespace],
             input = document.getElementById(config.inputId),
             close = document.getElementById(config.closeId),
             setCloseVisibility = function (value) {
@@ -52,8 +52,8 @@
         }
       };
 
-  response = validate();
+  validationResponse = validateConfig();
 
-  if (response.isValid) document.addEventListener('DOMContentLoaded', action);
-  else throw response.errors.toString();
+  if (validationResponse.isValid) document.addEventListener('DOMContentLoaded', action);
+  else throw validationResponse.errors.toString();
 })();
