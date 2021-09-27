@@ -2,21 +2,26 @@
   var validationResponse,
       configNamespace = 'searchCloseFocus',
       validateConfig = function () {
-        var errors = [],
+        var config,
+            errors = [],
             isValid = true;
 
         if (!window.$love || typeof window.$love !== 'object') {
           isValid = false;
           errors.push('Please define window.$love as an object');
-        } else if (!window.$love[configNamespace] || typeof window.$love[configNamespace] !== 'object') {
-          isValid = false;
-          errors.push(`Please define window.$love.${ configNamespace } as an object`);
-        } else if (!window.$love[configNamespace].inputId || typeof window.$love[configNamespace].inputId !== 'string') {
-          isValid = false;
-          errors.push(`Please define window.$love.${ configNamespace }.inputId as a string`);
-        } else if (!window.$love[configNamespace].closeId || typeof window.$love[configNamespace].closeId !== 'string') {
-          isValid = false;
-          errors.push(`Please define window.$love.${ configNamespace }.closeId as a string`);
+        } else {
+          config = window.$love[configNamespace];
+
+          if (!config || typeof config !== 'object') {
+            isValid = false;
+            errors.push(`Please define window.$love.${ configNamespace } as an object`);
+          } else if (!config.inputId || typeof config.inputId !== 'string') {
+            isValid = false;
+            errors.push(`Please define window.$love.${ configNamespace }.inputId as a string`);
+          } else if (!config.closeId || typeof config.closeId !== 'string') {
+            isValid = false;
+            errors.push(`Please define window.$love.${ configNamespace }.closeId as a string`);
+          }
         }
 
         return { errors: errors, isValid: isValid };

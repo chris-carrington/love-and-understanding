@@ -2,24 +2,29 @@
   var validationResponse,
       configNamespace = 'navScrollToggle',
       validateConfig = function () {
-        var errors = [],
+        var config,
+            errors = [],
             isValid = true;
 
         if (!window.$love || typeof window.$love !== 'object') {
           isValid = false;
           errors.push('Please define window.$love as an object');
-        } else if (!window.$love[configNamespace] || typeof window.$love[configNamespace] !== 'object') {
-          isValid = false;
-          errors.push(`Please define window.$love.${ configNamespace } as an object`);
-        } else if (!window.$love[configNamespace].navId || typeof window.$love[configNamespace].navId !== 'string') {
-          isValid = false;
-          errors.push(`Please define window.$love.${ configNamespace }.navId as a string`);
-        } else if (!window.$love[configNamespace].navHideClass || typeof window.$love[configNamespace].navHideClass !== 'string') {
-          isValid = false;
-          errors.push(`Please define window.$love.${ configNamespace }.navHideClass as a string`);
-        } else if (!window.$love[configNamespace].doneScrollingAfter || typeof window.$love[configNamespace].doneScrollingAfter !== 'number') {
-          isValid = false;
-          errors.push(`Please define window.$love.${ configNamespace }.doneScrollingAfter as a number`);
+        } else {
+          config = window.$love[configNamespace];
+
+          if (!config || typeof config !== 'object') {
+            isValid = false;
+            errors.push(`Please define window.$love.${ configNamespace } as an object`);
+          } else if (!config.navId || typeof config.navId !== 'string') {
+            isValid = false;
+            errors.push(`Please define window.$love.${ configNamespace }.navId as a string`);
+          } else if (!config.navHideClass || typeof config.navHideClass !== 'string') {
+            isValid = false;
+            errors.push(`Please define window.$love.${ configNamespace }.navHideClass as a string`);
+          } else if (!config.doneScrollingAfter || typeof config.doneScrollingAfter !== 'number') {
+            isValid = false;
+            errors.push(`Please define window.$love.${ configNamespace }.doneScrollingAfter as a number`);
+          }
         }
 
         return { errors: errors, isValid: isValid };
