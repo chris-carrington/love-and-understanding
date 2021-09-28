@@ -33,19 +33,28 @@
         var scrollTop = 0,
             timeout = null,
             lastScrollTop = 0,
+            isTouchDown = false,
             isScrolling = false,
             config = window.$love[configNamespace],
             nav = document.getElementById(config.navId);
 
         if (nav) {
+          window.addEventListener('touchstart', function () {
+            isTouchDown = true;
+          }, false);
+
+          window.addEventListener('touchend', function () {
+            isTouchDown = false;
+          }, false);
+
           window.addEventListener('scroll', function () {
             if (timeout) window.clearTimeout(timeout);
 
             if (!isScrolling) {
               scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-              if (scrollTop > lastScrollTop) nav.classList.add(config.navHideClass); // downscroll
-              else nav.classList.remove(config.navHideClass); // upscroll
+              if (scrollTop > lastScrollTop) nav.classList.add(config.navHideClass); // scrolling down
+              else if (!isTouchDown) nav.classList.remove(config.navHideClass); // scrolling up and not touching down 
       
               isScrolling = true;
               lastScrollTop = scrollTop < 0 ? 0 : scrollTop; // for touch screens w/ bounce / negative scrollTop feature
@@ -63,5 +72,5 @@
   validationResponse = validateConfig();
 
   if (validationResponse.isValid) document.addEventListener('DOMContentLoaded', action);
-  else throw validationResponse.errors.toString();
+  else throw String(validationResponse.errors);
 }());
